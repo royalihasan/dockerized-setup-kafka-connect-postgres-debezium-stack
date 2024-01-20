@@ -1,0 +1,21 @@
+# *-----------------------------*
+# |  PostgreSQL 12.3 (latest)   |
+# |  https://hub.docker.com/_/postgre
+
+# *-----------------------------*
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    restart: on-failure
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    command: postgres -c wal_level=logical
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
