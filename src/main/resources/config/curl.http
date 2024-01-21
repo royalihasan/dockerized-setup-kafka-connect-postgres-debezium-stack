@@ -1,0 +1,25 @@
+# add connecter
+# curl -X POST -H "Content-Type: application/json" --data @/path/to/postgres-connector.json http://connect:8083/connectors
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "postgres-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.user": "postgres",
+    "database.password": "postgres",
+    "database.dbname": "postgres",
+    "database.server.name": "postgres",
+    "database.whitelist": "postgres",
+    "database.history.kafka.bootstrap.servers": "kafka:9092",
+    "database.history.kafka.topic": "schema-changes.postgres"
+  }
+}
+//# check connecter
+//# curl http://connect:8083/connectors/postgres-connector/status
+GET http://localhost:8083/connectors/postgres-connector/status
+
